@@ -13,7 +13,7 @@ Test assignment for the interview.
 1.The client uploads the image and sends it to the server.   
 2.The server receives the image and displays it.
 
-#### :clipboard: Development
+#### :clipboard: Development plan
 Client :
 1. Main window design.
 2. Log system.
