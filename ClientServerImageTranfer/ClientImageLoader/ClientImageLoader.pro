@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         network\tcptransferdata.cpp \
-        utils\logmanager.cpp
+        utils\logmanager.cpp \
+        ../utils/logmanager.cpp
 
 HEADERS += \
         mainwindow.h \
         network/tcptransferdata.h \
-        utils\logmanager.h
+        utils\logmanager.h \
+        ../utils/logmanager.h
 
 
 

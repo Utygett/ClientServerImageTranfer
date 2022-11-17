@@ -25,9 +25,13 @@ void MainWindow::on_bt_sendImage_clicked()
                                     );
     qDebug() << "Filter: " << strFilter << imageFileName;
     //check the file is image
-
+    QPixmap image(imageFileName);
+    if(image.isNull())
+    {
+        // TODO infom clint what image is broken
+        return ;
+    }
     //Open file
-
     QFile imageFile(imageFileName);
     imageFile.open(QIODevice::ReadOnly);
     QByteArray rawImage = imageFile.readAll();
