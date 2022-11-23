@@ -28,10 +28,12 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         network\server.cpp \
+         ..\utils\logmanager.cpp
 
 HEADERS += \
         mainwindow.h \
         network\server.h \
+         ..\utils\logmanager.h
 
 FORMS += \
         mainwindow.ui

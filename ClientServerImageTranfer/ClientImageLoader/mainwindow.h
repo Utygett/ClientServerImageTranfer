@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QDebug>
 #include "network/tcptransferdata.h"
-#include "utils/logmanager.h"
+#include "../utils/logmanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +17,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+public slots:
+    void slotAppendMessageOnBoard(const QString &message);
 private slots:
     void on_bt_sendImage_clicked();
     void on_bt_exit_clicked();

@@ -13,14 +13,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::slotAppendMessageOnBoard(const QString &message)
+{
+    QString currentTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
+    ui->tb_mainBoard->append(currentTime + message);
+}
+
 void MainWindow::on_bt_sendImage_clicked()
 {
     //Get file name
     QString strFilter;
     QString imageFileName = QFileDialog::getOpenFileName(0,
                                     "Отправить изображение",
-                                    "C:\\",
-                                    "*.png ;; *.jpg ;; *.bmp",
+                                    "C:\\emploerPhoto\\Photo",
+                                    "*.jpg ;; *.png ;; *.bmp",
                                     &strFilter
                                     );
     qDebug() << "Filter: " << strFilter << imageFileName;
@@ -28,7 +34,9 @@ void MainWindow::on_bt_sendImage_clicked()
     QPixmap image(imageFileName);
     if(image.isNull())
     {
-        // TODO infom clint what image is broken
+        QString message(imageFileName + " не удалось отправить изображение, файл поврежден.");
+        slotAppendMessageOnBoard(message);
+        LogManager::error(message);
         return ;
     }
     //Open file
@@ -38,13 +46,16 @@ void MainWindow::on_bt_sendImage_clicked()
     imageFile.close();
     //Send to Server
     TCPTransferData imageSender;
-    if(imageSender.send(rawImage, strFilter))
+    if(imageSender.send(rawImage, strFilter.remove("*.")))
     {
-        qDebug() << "SUCCESS send message";
+        QString message(imageFileName + " изображение успешно отправлено.");
+        slotAppendMessageOnBoard(message);
+        LogManager::message(message);
     }
     else {
-
-        qDebug() << "ERROR send message";
+        QString message(imageFileName + " не удалось отправить изображение, ошибка на сервере.");
+        slotAppendMessageOnBoard(message);
+        LogManager::message(message);
     }
     //GetResultFromServer
     //

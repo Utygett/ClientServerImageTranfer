@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "network/server.h"
 
 namespace Ui {
 class MainWindow;
@@ -14,7 +15,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+public slots:
+    void slotImageRecieve(const QPixmap & image);
 private:
     Ui::MainWindow *ui;
 };

@@ -6,9 +6,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    Server *server = new Server(55555);
+    connect(server, &Server::sendImage, this, &MainWindow::slotImageRecieve);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::slotImageRecieve(const QPixmap &image)
+{
+    ui->label->setPixmap(image);
 }
